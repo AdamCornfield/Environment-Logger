@@ -1,0 +1,8 @@
+1~Test1~Ufxx|6~ADMIN
+2~Test2~Ufxx|7~USER
+3~test~yjxy~USER
+4~test~yjxy~ADMIN
+5~test1~yjxy6~USER
+6~test2~yjxy7~ADMIN
+7~test~yjxy~ADMIN
+8~asdsdsd~yjxy~USER
