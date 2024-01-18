@@ -32,7 +32,7 @@ public class Client {
             String connStr = inputScanner.nextLine();
 
             //Detects if the user has just pressed enter or entered data
-            if (!connStr.isBlank()) {
+            if (!connStr.equals("")) {
                 serverName = connStr.split(":")[0];
                 port = Integer.parseInt(connStr.split(":")[1]);
             }
