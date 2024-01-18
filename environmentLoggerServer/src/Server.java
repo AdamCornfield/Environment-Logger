@@ -16,7 +16,8 @@ public class Server extends Thread {
     }
 
     public void run() {
-        System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
+        util.clearCMD();
+        System.out.println("Waiting for clients on port " + serverSocket.getLocalPort() + "...");
         System.out.println("Type 'help' for a list of available console commands");
         while(true) {
             try {

@@ -1,0 +1,1 @@
+java -jar ./environmentLoggerClient.jar localhost 6602

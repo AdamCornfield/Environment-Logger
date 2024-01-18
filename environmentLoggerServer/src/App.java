@@ -18,6 +18,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         //Start of the server program
         int port = 6602;
+        if (args.length == 1) {
+            port = Integer.parseInt(args[0]);
+        }
 
         //Crates a new thread which the server will be created on
         //This thread will be dedicated towards handling any incoming connection requests

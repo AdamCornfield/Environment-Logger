@@ -1,18 +1,13 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# Setting up the server
+1. Open this folder in command prompt or terminal
+2. Run the command: java -jar ./environmentLoggerServer.jar 6602
 
-## Folder Structure
+Alternatively
+1. Double click on Start Server.bat in the file explorer to open the server
 
-The workspace contains two folders by default, where:
+# Usage
+The server will run on port 6602 by default, this can be changed by altering the last argument in the command line to run it.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Once on the server type "help" to get a full list of usable commands
