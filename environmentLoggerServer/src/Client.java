@@ -11,10 +11,12 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -279,45 +281,25 @@ public class Client implements Runnable {
         file.setWritable(false);
 
         //Define variables
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime localDateTime;
-        int inpUserID;
+        String localDateTime;
+        int inpUserID = userID;
         String postCode;
         Double concentration;
 
         /*
          * Date Collection
-         * Uses java time library to format and validate the date time
+         * Uses java time library to get and format the current time
          */
+        Date currentDate = new Date();
 
-        out.writeUTF("Please enter the time the data was collected using the format (YYYY-MM-DD HH:MM:SS):");
-        while (true) {
-            try {
-                String date = in.readUTF();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                localDateTime = LocalDateTime.parse(date, formatter);
-                break;
-            } catch (DateTimeParseException e) {
-                out.writeUTF("Date is not of correct format, please try again");
-            }
-        }
+        localDateTime = dateFormat.format(currentDate);
         
         /*
          * Collects user ID
-         * Uses a try catch loop and parse int to ensure it's a valid integer
-         * It is intended that a user uses their own userID, however people can submit on others behalf
+         * Uses the user ID of the currently connected user
          */
-
-        out.writeUTF("\nNow confirm your user ID");
-        out.writeUTF("Your userID is " + userID);
-        while (true) {
-            try {
-                inpUserID = Integer.parseInt(in.readUTF());
-                break;
-            } catch (NumberFormatException e) {
-                out.writeUTF("That is not a correct userID, please try again");
-            }
-        }
 
         /*
          * Collects post code
@@ -327,7 +309,7 @@ public class Client implements Runnable {
         String postcodeRegex = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][A-Z]{2}$";
         Pattern pattern = Pattern.compile(postcodeRegex);
 
-        out.writeUTF("\nNext please enter the post code of the data");
+        out.writeUTF("\nFirst please enter the post code of the data");
         out.writeUTF("example post code: 'CF5 2YB'");
         while (true) {
             postCode = in.readUTF().toUpperCase();
@@ -345,7 +327,7 @@ public class Client implements Runnable {
          * I use an if statement to prevent the concentration from being a negative value as that is not possible
          */
 
-        out.writeUTF("\nFinally, please enter the CO2 concentration in PPM (Parts Per Million)");
+        out.writeUTF("\nNext, please enter the CO2 concentration in PPM (Parts Per Million)");
         while (true) {
             try {
                 concentration = Double.parseDouble(in.readUTF());
@@ -360,13 +342,14 @@ public class Client implements Runnable {
             }
         }
 
-        // Pulls data from file as a 2D Array List, once data has been edited, it is the saved back to the csv file
-        ArrayList<List<String>> envData = fileSystem.parseCSV("src/data/envData.csv");
-        envData = fileSystem.addToList(envData, localDateTime.format(formatter), "" + inpUserID, postCode, Double.toString(concentration));
-        fileSystem.listToCSV(envData, "src/data/envData.csv");
-
         //Make the file Writable again
         file.setWritable(true);
+        
+        // Pulls data from file as a 2D Array List, once data has been edited, it is the saved back to the csv file
+        ArrayList<List<String>> envData = fileSystem.parseCSV("src/data/envData.csv");
+        envData = fileSystem.addToList(envData, localDateTime, "" + inpUserID, postCode, Double.toString(concentration));
+        fileSystem.listToCSV(envData, "src/data/envData.csv");
+
 
         out.writeUTF("Data has successfully been saved to the database");
         out.writeUTF("Press enter to continue...");
