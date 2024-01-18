@@ -116,6 +116,10 @@ public class Client implements Runnable {
     private void login () throws IOException {
         out.writeUTF("--clearCMD");
         out.writeUTF("Welcome to the Environmental CO2 System");
+        
+        out.writeUTF("[DEBUG] For debugging and demonstrative purposes example credentials have been included below:");
+        out.writeUTF("Admin account - Username: admin, Password: admin");
+        out.writeUTF("User account - Username: user, Password: user");
 
         //Reset user data to defaults
         setUserID(0);
@@ -170,6 +174,7 @@ public class Client implements Runnable {
         out.writeUTF("--clearCMD");
         out.writeUTF("Welcome to the admin command console!");
         out.writeUTF("Use command 'logout' to return to the login menu.");
+        out.writeUTF("Type 'help' for a list of available console commands");
         Command command = new Command();
 
         while (true) {

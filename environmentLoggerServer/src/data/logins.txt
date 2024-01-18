@@ -6,3 +6,5 @@
 6~test2~yjxy7~ADMIN
 7~test~yjxy~ADMIN
 8~asdsdsd~yjxy~USER
+9~admin~firns~ADMIN
+10~user~zxjw~USER
