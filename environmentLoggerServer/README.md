@@ -1,18 +1,18 @@
-## Getting Started
+# Getting Started
 
-# Setting up the server
+## Setting up the server
 1. Open this folder in command prompt or terminal
 2. Run the command: java -jar ./environmentLoggerServer.jar 6602
 
 Alternatively
 1. Double click on Start Server.bat in the file explorer to open the server
 
-# Usage
+## Usage
 The server will run on port 6602 by default, this can be changed by altering the last argument in the command line to run it.
 
 Once on the server type "help" to get a full list of usable commands
 
-# Compatability and Versioning
+## Compatability and Versioning
 Exported in JDK version 21.0.2+13-LTS-58:
  
 Tested and verified as working on a system running java runtime environment build 21.0.2+13-LTS-58:
